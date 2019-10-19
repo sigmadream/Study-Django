@@ -39,7 +39,7 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-PROJECT_APPS = ["users", "rooms", "core"]
+PROJECT_APPS = ["users", "rooms", "core", "reviews", "reservations", "lists", "conversations"]
 
 THIRD_PARTY_APPS = ["django_countries",]
 
