@@ -48,6 +48,7 @@ class Room(core_models.TimeStampModel):
     city = models.CharField(max_length=80)
     price = models.IntegerField()
     address = models.CharField(max_length=140)
+    guests = models.IntegerField()
     beds = models.IntegerField()
     bedrooms = models.IntegerField()
     baths = models.IntegerField()
