@@ -3,8 +3,13 @@ from . import models
 
 
 @admin.register(models.RoomType, models.Facility, models.Amenity, models.HouseRule)
-class RoomTypeAdmin(admin.ModelAdmin):
-    pass
+class ItemAdmin(admin.ModelAdmin):
+
+    list_display = ("name", "used_by")
+
+    def used_by(self, obj):
+        return obj.rooms.count()
+
 
 @admin.register(models.Room)
 class RoomAdmin(admin.ModelAdmin):
@@ -14,22 +19,13 @@ class RoomAdmin(admin.ModelAdmin):
             "Basic Info",
             {"fields": ("name", "description", "country", "address", "price")},
         ),
-        (
-            "Times",
-            {"fields": ("check_in", "check_out", "instant_book")},
-        ),
-        (
-            "Space",
-            {"fields": ("guests", "beds", "bedrooms", "baths")},
-        ),
+        ("Times", {"fields": ("check_in", "check_out", "instant_book")}),
+        ("Space", {"fields": ("guests", "beds", "bedrooms", "baths")}),
         (
             "More About the Space",
             {"fields": ("amenities", "facilities", "house_rules")},
         ),
-        (
-            "Last Details",
-            {"fields": ("host",)},
-        ),
+        ("Last Details", {"fields": ("host",)}),
     )
 
     ordering = ("name", "price")
@@ -47,7 +43,8 @@ class RoomAdmin(admin.ModelAdmin):
         "check_in",
         "check_out",
         "instant_book",
-        "count_amenities"
+        "count_amenities",
+        "count_photos",
     )
 
     list_filter = (
@@ -59,7 +56,7 @@ class RoomAdmin(admin.ModelAdmin):
         "facilities",
         "house_rules",
         "city",
-        "country"
+        "country",
     )
 
     search_fields = ("=city", "^host__username")
@@ -67,7 +64,10 @@ class RoomAdmin(admin.ModelAdmin):
     filter_horizontal = ("amenities", "facilities", "house_rules")
 
     def count_amenities(self, obj):
-        return "Potato"
+        return obj.amenities.count()
+
+    def count_photos(self, obj):
+        return obj.photos.count()
 
 
 @admin.register(models.Photo)
