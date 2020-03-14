@@ -10,7 +10,7 @@
 ## 개발환경
 
 ```
-$ pipenv install django
-$ pipenv install flake8 --dev
-$ pipenv install black --dev --pre
+$ python -m venv venv  
+$ source venv/bin/activate
+$ pip install -r requirements.txt
 ```
