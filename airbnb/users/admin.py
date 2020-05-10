@@ -17,10 +17,11 @@ class CustomUserAdmin(UserAdmin):
                     "avatar",
                     "gender",
                     "bio",
-                    "birthday",
                     "language",
                     "currency",
                     "superhost",
+                    "email_verified",
+                    "email_secret",
                 )
             },
         ),

@@ -39,9 +39,17 @@ DJANGO_APPS = [
     "django.contrib.staticfiles",
 ]
 
-PROJECT_APPS = ["users", "rooms", "core", "reviews", "reservations", "lists", "conversations"]
+PROJECT_APPS = [
+    "users",
+    "rooms",
+    "core",
+    "reviews",
+    "reservations",
+    "lists",
+    "conversations",
+]
 
-THIRD_PARTY_APPS = ["django_countries","django_seed"]
+THIRD_PARTY_APPS = ["django_countries", "django_seed"]
 
 INSTALLED_APPS = DJANGO_APPS + PROJECT_APPS + THIRD_PARTY_APPS
 
@@ -124,3 +132,7 @@ AUTH_USER_MODEL = "users.User"
 MEDIA_ROOT = os.path.join(BASE_DIR, "uploads")
 
 MEDIA_URL = "/media/"
+
+# Email Configuration
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
