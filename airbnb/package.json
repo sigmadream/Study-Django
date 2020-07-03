@@ -1,0 +1,19 @@
+{
+  "name": "airbnb",
+  "version": "1.0.0",
+  "description": "Django with...",
+  "author": "sigmadream",
+  "license": "ISC",
+  "scripts": {
+    "css": "gulp"
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.8.4",
+    "gulp": "^4.0.2",
+    "gulp-csso": "^4.0.1",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.1.0",
+    "node-sass": "^4.14.1",
+    "tailwindcss": "^1.4.6"
+  }
+}

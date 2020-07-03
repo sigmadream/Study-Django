@@ -4,5 +4,8 @@
   "python.linting.enabled": true,
   "python.formatting.provider": "black",
   "python.linting.pylintEnabled": false,
-  "python.linting.flake8Args": ["--max-line-length=140"]
+  "python.linting.flake8Args": [
+    "--max-line-length=140"
+  ],
+  "git.ignoreLimitWarning": true
 }
