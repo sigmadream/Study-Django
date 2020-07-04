@@ -4,9 +4,7 @@ from . import models
 
 
 @admin.register(models.User)
-# class CustomUserAdmin(admin.ModelAdmin):
 class CustomUserAdmin(UserAdmin):
-
     """ Custom User Admin """
 
     fieldsets = UserAdmin.fieldsets + (
@@ -17,15 +15,17 @@ class CustomUserAdmin(UserAdmin):
                     "avatar",
                     "gender",
                     "bio",
+                    "birthdate",
                     "language",
                     "currency",
                     "superhost",
-                    "email_verified",
-                    "email_secret",
+                    "login_method",
                 )
             },
         ),
     )
+
+    list_filter = UserAdmin.list_filter + ("superhost",)
 
     list_display = (
         "username",
@@ -42,5 +42,3 @@ class CustomUserAdmin(UserAdmin):
         "email_secret",
         "login_method",
     )
-
-    list_filter = UserAdmin.list_filter + ("superhost",)
