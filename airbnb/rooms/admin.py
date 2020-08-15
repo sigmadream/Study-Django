@@ -71,7 +71,7 @@ class RoomAdmin(admin.ModelAdmin):
 
     list_filter = (
         "instant_book",
-        # "host__superhost",
+        "host__superhost",
         "room_type",
         "amenities",
         "facilities",
@@ -108,4 +108,3 @@ class PhotoAdmin(admin.ModelAdmin):
         return mark_safe(f'<img width="50px" src="{obj.file.url}" />')
 
     get_thumbnail.short_description = "Thumbnail"
-    

@@ -2,7 +2,6 @@ import uuid
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-from django.shortcuts import reverse
 from django.core.mail import send_mail
 from django.utils.html import strip_tags
 from django.shortcuts import reverse
@@ -35,16 +34,17 @@ class User(AbstractUser):
 
     LOGIN_EMAIL = "email"
     LOGIN_GITHUB = "github"
-    LOGIN_KAKAO = "kakao"
+    LOGING_KAKAO = "kakao"
 
     LOGIN_CHOICES = (
         (LOGIN_EMAIL, "Email"),
         (LOGIN_GITHUB, "Github"),
-        (LOGIN_KAKAO, "Kakao"),
+        (LOGING_KAKAO, "Kakao"),
     )
+
     avatar = models.ImageField(upload_to="avatars", blank=True)
     gender = models.CharField(choices=GENDER_CHOICES, max_length=10, blank=True)
-    bio = models.TextField(blank=True)
+    bio = models.TextField(blank=True, null=True)
     birthdate = models.DateField(blank=True, null=True)
     language = models.CharField(
         choices=LANGUAGE_CHOICES, max_length=2, blank=True, default=LANGUAGE_KOREAN

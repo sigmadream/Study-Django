@@ -1,10 +1,14 @@
+from django.utils import timezone
 from django.db import models
-from core import models as core_models
 from django.urls import reverse
 from django_countries.fields import CountryField
+from core import models as core_models
+from cal import Calendar
 
 
-class AbstractItem(core_models.TimeStampModel):
+class AbstractItem(core_models.TimeStampedModel):
+
+    """ Abstract Item """
 
     name = models.CharField(max_length=80)
 
@@ -16,27 +20,42 @@ class AbstractItem(core_models.TimeStampModel):
 
 
 class RoomType(AbstractItem):
+
+    """ RoomType Model Definition """
+
     class Meta:
         verbose_name = "Room Type"
-        ordering = ["name"]
 
 
 class Amenity(AbstractItem):
+
+    """ Amenity Model Definition """
+
     class Meta:
         verbose_name_plural = "Amenities"
 
 
 class Facility(AbstractItem):
+
+    """ Facility Model Definition """
+
+    pass
+
     class Meta:
         verbose_name_plural = "Facilities"
 
 
 class HouseRule(AbstractItem):
+
+    """ HouseRule Model Definition """
+
     class Meta:
         verbose_name = "House Rule"
 
 
-class Photo(core_models.TimeStampModel):
+class Photo(core_models.TimeStampedModel):
+
+    """ Photo Model Definition """
 
     caption = models.CharField(max_length=80)
     file = models.ImageField(upload_to="room_photos")
@@ -46,7 +65,10 @@ class Photo(core_models.TimeStampModel):
         return self.caption
 
 
-class Room(core_models.TimeStampModel):
+class Room(core_models.TimeStampedModel):
+
+    """ Room Model Definition """
+
     name = models.CharField(max_length=140)
     description = models.TextField()
     country = CountryField()
@@ -100,8 +122,13 @@ class Room(core_models.TimeStampModel):
         photos = self.photos.all()[1:5]
         return photos
 
-    def get_beds(self):
-        if self.beds == 1:
-            return "1 bed"
-        else:
-            return f"{self.beds} beds"
+    def get_calendars(self):
+        now = timezone.now()
+        this_year = now.year
+        this_month = now.month
+        next_month = this_month + 1
+        if this_month == 12:
+            next_month = 1
+        this_month_cal = Calendar(this_year, this_month)
+        next_month_cal = Calendar(this_year, next_month)
+        return [this_month_cal, next_month_cal]

@@ -54,7 +54,6 @@ class Command(BaseCommand):
             "Towels",
             "TV",
         ]
-
-        for amenity in amenities:
-            Amenity.objects.create(name=amenity)
+        for a in amenities:
+            Amenity.objects.create(name=a)
         self.stdout.write(self.style.SUCCESS("Amenities created!"))

@@ -1,15 +1,18 @@
 from django.http import Http404
 from django.views.generic import ListView, DetailView, View, UpdateView, FormView
 from django.shortcuts import render, redirect, reverse
+from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-from django.core.paginator import Paginator
 from users import mixins as user_mixins
 from . import models, forms
 
 
 class HomeView(ListView):
+
+    """ HomeView Definition """
+
     model = models.Room
     paginate_by = 12
     paginate_orphans = 5
@@ -18,6 +21,9 @@ class HomeView(ListView):
 
 
 class RoomDetail(DetailView):
+
+    """ RoomDetail Definition """
+
     model = models.Room
 
 
@@ -195,7 +201,6 @@ class CreateRoomView(user_mixins.LoggedInOnlyView, FormView):
         room = form.save()
         room.host = self.request.user
         room.save()
-        messages.success(self.request, "Photo Uploaded")
         form.save_m2m()
         messages.success(self.request, "Room Uploaded")
         return redirect(reverse("rooms:detail", kwargs={"pk": room.pk}))

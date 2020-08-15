@@ -20,5 +20,5 @@ $ pip install -r requirements.txt
 ```
 $ python manage.py migrate
 $ python manage.py createsuperuser
-$ python manage.py {seed_user, seed_amentities,  seed_facilities, seed_roomtype, seed_rooms, send_reservations, seed_reviews}
+$ python manage.py {seed_user, seed_amenities,  seed_facilities, seed_roomtype, seed_rooms, send_reservations, seed_reviews}
 ```
