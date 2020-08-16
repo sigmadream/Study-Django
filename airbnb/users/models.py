@@ -6,6 +6,7 @@ from django.core.mail import send_mail
 from django.utils.html import strip_tags
 from django.shortcuts import reverse
 from django.template.loader import render_to_string
+from core import managers as core_managers
 
 
 class User(AbstractUser):
@@ -23,7 +24,7 @@ class User(AbstractUser):
     )
 
     LANGUAGE_ENGLISH = "en"
-    LANGUAGE_KOREAN = "kr"
+    LANGUAGE_KOREAN = "ko"
 
     LANGUAGE_CHOICES = ((LANGUAGE_ENGLISH, "English"), (LANGUAGE_KOREAN, "Korean"))
 
@@ -58,6 +59,8 @@ class User(AbstractUser):
     login_method = models.CharField(
         max_length=50, choices=LOGIN_CHOICES, default=LOGIN_EMAIL
     )
+
+    objects = core_managers.CustomModelManager()
 
     def get_absolute_url(self):
         return reverse("users:profile", kwargs={"pk": self.pk})

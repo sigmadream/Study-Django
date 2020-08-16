@@ -60,6 +60,7 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
 ]
 
 ROOT_URLCONF = "config.urls"
@@ -138,7 +139,16 @@ MEDIA_URL = "/media/"
 # Email Configuration
 
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+# EMAIL_HOST = "smtp.mailgun.org"
+# EMAIL_PORT = "587"
+# EMAIL_HOST_USER = "test"
+# EMAIL_HOST_PASSWORD = "test"
+EMAIL_FROM = "test"
 
 # Auth
 
 LOGIN_URL = "/users/login/"
+
+# Locale
+
+LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
