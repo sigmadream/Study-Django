@@ -7,10 +7,24 @@ class Category(models.Model):
     title = models.CharField(max_length=100, verbose_name='Title')
     slug = models.SlugField(max_length=150, unique=True)
 
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+
+    def __str__(self):
+        return self.title
+
 
 class Tag(models.Model):
     title = models.CharField(max_length=50, verbose_name='Tag')
     slug = models.SlugField(max_length=150, unique=True)
+
+    class Meta:
+        verbose_name = 'Tag'
+        verbose_name_plural = 'Tags'
+
+    def __str__(self):
+        return self.title
 
 
 class Post(models.Model):
@@ -21,7 +35,14 @@ class Post(models.Model):
     )
     publication_data = models.DateTimeField(verbose_name="Created")
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="Category")
-    picture = models.ImageField(upload_to="uploads/%Y/%m/%d", verbose_name="Picture")
+    picture = models.ImageField(upload_to="uploads/%Y/%m/%d", blank=True, null=True, verbose_name="Picture")
     content = models.TextField(verbose_name="Content")
     author = models.CharField(max_length=30, default="Anonymous", verbose_name="Created by")
     tags = models.ManyToManyField(Tag)
+
+    class Meta:
+        verbose_name = 'Post'
+        verbose_name_plural = 'Posts'
+
+    def __str__(self):
+        return self.title
