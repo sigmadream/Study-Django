@@ -1,8 +1,9 @@
 from django.urls import path
-from post.views import index
-from django.views.generic import TemplateView
+from .views import index, category, tags, post_details
 
 urlpatterns = [
-    path('hello/', index, name='hello'),
-    path('', TemplateView.as_view(template_name='index.html'), name='index')
+    path('', index),
+    path('categories/<slug:category_slug>', category, name='categories'),
+    path('tags/<slug:tag_slug>', tags, name='tags'),
+    path('<slug:post_slug>', post_details, name='article-details')
 ]

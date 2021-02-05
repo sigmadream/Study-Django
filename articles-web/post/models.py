@@ -1,6 +1,7 @@
 from django.db import models
+from django.urls import reverse
 
-STATUS_CHOICES = (("draft", "Draft"), ("published", "PUblished"))
+STATUS_CHOICES = (("draft", "Draft"), ("published", "Published"))
 
 
 class Category(models.Model):
@@ -10,6 +11,9 @@ class Category(models.Model):
     class Meta:
         verbose_name = 'Category'
         verbose_name_plural = 'Categories'
+
+    def get_absolute_url(self):
+        return reverse('categories', args=[self.slug])
 
     def __str__(self):
         return self.title
@@ -22,6 +26,9 @@ class Tag(models.Model):
     class Meta:
         verbose_name = 'Tag'
         verbose_name_plural = 'Tags'
+
+    def get_absolute_url(self):
+        return reverse('tags', args=[self.slug])
 
     def __str__(self):
         return self.title
@@ -43,6 +50,9 @@ class Post(models.Model):
     class Meta:
         verbose_name = 'Post'
         verbose_name_plural = 'Posts'
+
+    def get_absolute_url(self):
+        return reverse('article-details', args=[self.slug])
 
     def __str__(self):
         return self.title
