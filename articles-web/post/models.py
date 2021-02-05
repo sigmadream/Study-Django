@@ -1,3 +1,27 @@
 from django.db import models
 
-# Create your models here.
+STATUS_CHOICES = (("draft", "Draft"), ("published", "PUblished"))
+
+
+class Category(models.Model):
+    title = models.CharField(max_length=100, verbose_name='Title')
+    slug = models.SlugField(max_length=150, unique=True)
+
+
+class Tag(models.Model):
+    title = models.CharField(max_length=50, verbose_name='Tag')
+    slug = models.SlugField(max_length=150, unique=True)
+
+
+class Post(models.Model):
+    title = models.CharField(max_length=255, verbose_name="Title")
+    slug = models.SlugField(unique=True)
+    status = models.CharField(
+        choices=STATUS_CHOICES, default="draft", max_length=10, verbose_name="Status"
+    )
+    publication_data = models.DateTimeField(verbose_name="Created")
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="Category")
+    picture = models.ImageField(upload_to="uploads/%Y/%m/%d", verbose_name="Picture")
+    content = models.TextField(verbose_name="Content")
+    author = models.CharField(max_length=30, default="Anonymous", verbose_name="Created by")
+    tags = models.ManyToManyField(Tag)
