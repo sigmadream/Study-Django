@@ -17,6 +17,7 @@ def index(request):
 
 
 def category(request, category_slug):
+
     articles = Post.objects.filter(status='published').order_by('-publication_data')
     categories = Category.objects.all()
 
