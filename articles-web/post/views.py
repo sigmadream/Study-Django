@@ -1,7 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.template import loader
+from django.utils import timezone
 from .models import Post, Category
+from .forms import ContactForm
 
 
 def index(request):
@@ -17,7 +19,6 @@ def index(request):
 
 
 def category(request, category_slug):
-
     articles = Post.objects.filter(status='published').order_by('-publication_data')
     categories = Category.objects.all()
 
@@ -60,3 +61,25 @@ def post_details(request, post_slug):
     }
 
     return HttpResponse(template.render(context, request))
+
+
+def contact(request):
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.message_date = timezone.now()
+            form.save()
+            return redirect('contact-success')
+    else:
+        form = ContactForm()
+
+    context = {
+        'form': form
+    }
+
+    return render(request, 'contact.html', context)
+
+
+def contact_success(request):
+    return render(request, 'contactsuccess.html')
