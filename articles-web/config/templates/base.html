@@ -25,8 +25,8 @@
     <div class="nav-wrapper">
         <a href="{% url 'index' %}" class="brand-logo">Logo</a>
         <ul class="right hide-on-med-and-down">
+            <li><a class="modal-trigger" data-target="modal-search">Search</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
-            <li><a class="modal-trigger" data-target="modal1">Search</a></li>
             <!-- Dropdown Trigger -->
             <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Categories<i class="material-icons right">arrow_drop_down</i></a>
             </li>
@@ -34,12 +34,28 @@
     </div>
 </nav>
 
+<div id="modal-search" class="modal">
+    <div class="modal-content">
+        <h4>Search</h4>
+        <form>
+            <input type="text" name="q" placeholder="Search on articles.." value="{{ request.GET.q }}">
+            <input type="submit" value="search">
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
+</div>
+
 {% block banner %}
 {% endblock %}
 
 <div class="container">
     <div class="section">
         {% block content %}
+        {% endblock %}
+
+        {% block pagination %}
         {% endblock %}
     </div>
 </div>
@@ -95,7 +111,7 @@
 
 
 <!--  Scripts-->
-<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="{% static 'js/jquery-2.1.1.min.js' %}"></script>
 <script src="{% static 'js/materialize.js' %}"></script>
 <script src="{% static 'js/init.js' %} "></script>
 

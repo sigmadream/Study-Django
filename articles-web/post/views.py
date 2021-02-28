@@ -1,3 +1,5 @@
+from django.core.paginator import Paginator
+from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.template import loader
@@ -10,9 +12,23 @@ def index(request):
     articles = Post.objects.filter(status='published').order_by('-publication_data')
     categories = Category.objects.all()
 
+    query = request.GET.get('q')
+
+    # Search
+    if query:
+        articles = articles.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query)).distinct(
+        )
+
+    # Pagination
+    paginator = Paginator(articles, 6)
+    page_number = request.GET.get('page')
+    articles_paginator = paginator.get_page(page_number)
+
     template = loader.get_template('index.html')
     context = {
-        'articles': articles,
+        'articles': articles_paginator,
         'categories': categories
     }
     return HttpResponse(template.render(context, request))

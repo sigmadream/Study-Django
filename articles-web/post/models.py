@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 
+from ckeditor_uploader.fields import RichTextUploadingField
+
 STATUS_CHOICES = (("draft", "Draft"), ("published", "Published"))
 
 
@@ -43,7 +45,7 @@ class Post(models.Model):
     publication_data = models.DateTimeField(verbose_name="Created")
     category = models.ForeignKey(Category, on_delete=models.CASCADE, verbose_name="Category")
     picture = models.ImageField(upload_to="uploads/%Y/%m/%d", blank=True, null=True, verbose_name="Picture")
-    content = models.TextField(verbose_name="Content")
+    content = RichTextUploadingField(verbose_name="Content")
     author = models.CharField(max_length=30, default="Anonymous", verbose_name="Created by")
     tags = models.ManyToManyField(Tag)
 
