@@ -4,6 +4,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.template import loader
 from django.utils import timezone
+
+from authy.models import Profile
 from .models import Post, Category
 from .forms import ContactForm
 
@@ -69,6 +71,14 @@ def tags(request, tag_slug):
 
 def post_details(request, post_slug):
     article = get_object_or_404(Post, slug=post_slug)
+    user = request.user.id
+    profile = Profile.objects.get(user__id=user)
+
+    if request.method == 'POST':
+        if profile.favorites.filter(slug=post_slug).exists():
+            profile.favorites.remove(article)
+        else:
+            profile.favorites.add(article)
 
     template = loader.get_template('post_detail.html')
 

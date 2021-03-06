@@ -19,31 +19,35 @@
     {% for category in categories %}
         <li><a href="{{ category.get_absolute_url }}">{{ category.title }}</a></li>
     {% endfor %}
-</ul>
 
-<!-- Dropdown for user -->
-<ul id="dropdown2" class="dropdown-content">
-    {% if user.is_authenticated %}
-        <li><a href="{% url 'change_password' %}">Security</a></li>
-        <li class="divider"></li>
-        <li><a href="{% url 'logout' %}">Log out</a>
-    {% endif %}
+    <!-- Dropdown for user -->
+    <ul id="dropdown2" class="dropdown-content">
+        {% if user.is_authenticated %}
+            <li><a href="{% url 'profile' user.username %}">Profile</a></li>
+            <li><a href="{% url 'change_password' %}">Security</a></li>
+            <li class="divider"></li>
+            <li><a href="{% url 'logout' %}">Log out</a>
+        {% endif %}
+    </ul>
 </ul>
 
 <nav>
     <div class="nav-wrapper">
         <a href="{% url 'index' %}" class="brand-logo">Logo</a>
         <ul class="right hide-on-med-and-down">
-            <li><a class="modal-trigger" data-target="modal-search">Search</a></li>
+            <li><a class="modal-trigger" data-target="modal1">Search</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
+            {% if not user.is_authenticated %}
+                <li><a href="{% url 'signup' %}">Signup</a></li>
+            {% endif %}
             <li><a class="dropdown-trigger"
-                   href="{% if user.is_authenticated %}{% else %}{% url 'login' %}{% endif %}"
+                   href="{% if user.is_authenticated %}#!{% else %}{% url 'login' %}{% endif %}"
                     {% if user.is_authenticated %} data-target="dropdown2"{% else %}{% endif %}>
                 {% if user.is_authenticated %}{{ user.username }}{% else %}Please log in{% endif %}<i
                     class="material-icons right">account_circle</i></a>
                 <!-- Dropdown Trigger -->
-            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Categories<i class="material-icons right">arrow_drop_down</i></a>
-            </li>
+            <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Categories<i
+                    class="material-icons right">arrow_drop_down</i></a></li>
         </ul>
     </div>
 </nav>
@@ -57,7 +61,7 @@
         </form>
     </div>
     <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
     </div>
 </div>
 
@@ -78,7 +82,8 @@
     <div class="section no-pad-bot">
         <div class="container">
             <div class="row center">
-                <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+                <h5 class="header col s12 light">A modern responsive front-end framework based on Material
+                    Design</h5>
             </div>
         </div>
     </div>
@@ -90,7 +95,8 @@
         <div class="row">
             <div class="col l6 s12">
                 <h5 class="white-text">Company Bio</h5>
-                <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's
+                <p class="grey-text text-lighten-4">We are a team of college students working on this project like
+                    it's
                     our full time job. Any amount would help support and continue development on this project and is
                     greatly appreciated.</p>
 
