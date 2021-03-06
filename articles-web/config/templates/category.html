@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block banner %}
+    <div class="row">
+        <div style="background-color: #ddd;" class="col s12 m12 center-align">
+            <i class="material-icons medium">label</i>
+            <h5>----Category----</h5>
+            <h3>{{ categories.title }}</h3>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        {% for article in articles %}
+            <div class="col s12 m6">
+                <div class="card">
+                    <div class="card-image">
+                        <img src="{{ article.picture.url }}">
+                        <span class="card-title">{{ article.title }}</span>
+                    </div>
+                    <div class="card-content">
+                        {{ article.content }}
+                    </div>
+                    <div class="card-action">
+                        <a href="#">This is a link</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
