@@ -21,13 +21,27 @@
     {% endfor %}
 </ul>
 
+<!-- Dropdown for user -->
+<ul id="dropdown2" class="dropdown-content">
+    {% if user.is_authenticated %}
+        <li><a href="{% url 'change_password' %}">Security</a></li>
+        <li class="divider"></li>
+        <li><a href="{% url 'logout' %}">Log out</a>
+    {% endif %}
+</ul>
+
 <nav>
     <div class="nav-wrapper">
         <a href="{% url 'index' %}" class="brand-logo">Logo</a>
         <ul class="right hide-on-med-and-down">
             <li><a class="modal-trigger" data-target="modal-search">Search</a></li>
             <li><a href="{% url 'contact' %}">Contact</a></li>
-            <!-- Dropdown Trigger -->
+            <li><a class="dropdown-trigger"
+                   href="{% if user.is_authenticated %}{% else %}{% url 'login' %}{% endif %}"
+                    {% if user.is_authenticated %} data-target="dropdown2"{% else %}{% endif %}>
+                {% if user.is_authenticated %}{{ user.username }}{% else %}Please log in{% endif %}<i
+                    class="material-icons right">account_circle</i></a>
+                <!-- Dropdown Trigger -->
             <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Categories<i class="material-icons right">arrow_drop_down</i></a>
             </li>
         </ul>

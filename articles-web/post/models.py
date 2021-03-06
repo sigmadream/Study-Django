@@ -48,6 +48,7 @@ class Post(models.Model):
     content = RichTextUploadingField(verbose_name="Content")
     author = models.CharField(max_length=30, default="Anonymous", verbose_name="Created by")
     tags = models.ManyToManyField(Tag)
+    likes = models.IntegerField(default=0)
 
     class Meta:
         verbose_name = 'Post'
