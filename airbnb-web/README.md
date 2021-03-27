@@ -1,22 +1,6 @@
-# Airbnb clone
+# Airbnb-Web
 
-## 준비사항
+## ToDo
 
-* django
-* tailwind
-
-## 개발환경
-
-```
-$ python -m venv venv  
-$ source venv/bin/activate
-$ pip install -r requirements.txt
-```
-
-## 실행
-
-```
-$ python manage.py migrate
-$ python manage.py createsuperuser
-$ python manage.py {seed_user, seed_amenities, seed_facilities, seed_roomtype, seed_rooms, send_reservations, seed_reviews}
-```
+- [ ] 디자인(CSS) 변경이 필요함
+- [ ] 가능하다면 `Vue.js`를 적용해 볼 것
