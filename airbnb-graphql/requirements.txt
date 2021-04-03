@@ -1,0 +1,7 @@
+Django
+django-seed
+Faker
+Pillow
+flake8
+graphene-django
+pyjwt
