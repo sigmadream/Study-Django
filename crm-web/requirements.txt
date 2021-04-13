@@ -1,0 +1,6 @@
+django
+pillow
+black
+flake8
+jupyter
+notebook

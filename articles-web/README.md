@@ -1,1 +1,1 @@
-# Django 초급 예제
+# Articles-Web
