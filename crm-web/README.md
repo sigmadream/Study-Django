@@ -11,3 +11,12 @@ os.environ["DJANGO_SETTINGS_MODULE"] = "config.settings"
 import django
 django.setup()
 ```
+
+## tailwindcss
+
+* CDN 사용
+```
+<link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+```
+
+* [Tailblocks](https://github.com/mertJF/tailblocks)
