@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="py-5 border-b border-gray-200">
+        <a class="hover:text-blue-500" href="{% url 'signup' %}">Don't have an account?</a>
+    </div>
+
+    <form method="post" class="mt-5">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type='submit'>Login</button>
+    </form>
+
+{% endblock content %}

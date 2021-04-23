@@ -126,4 +126,10 @@ AUTH_USER_MODEL = "leads.User"
 # https://docs.djangoproject.com/en/3.2/releases/3.2/#customizing-type-of-auto-created-primary-keys
 DEFAULT_AUTO_FIELD = "django.db.models.AutoField"
 
+# Email
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
+# Auth
+LOGIN_REDIRECT_URL = "/leads"
+LOGIN_URL = "/login"
+LOGOUT_REDIRECT_URL = "/"
