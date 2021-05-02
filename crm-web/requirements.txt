@@ -4,3 +4,7 @@ black
 flake8
 jupyter
 notebook
+whitenoise
+django-tailwind
+django-crispy-forms
+crispy-tailwind

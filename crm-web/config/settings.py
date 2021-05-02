@@ -29,12 +29,20 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "whitenoise.runserver_nostatic",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+
+    # Third party apps
+    "crispy_forms",
+    "crispy_tailwind",
+    "tailwind",
+    "theme",
+
     # app
     "leads",
     "agents"
@@ -115,13 +123,17 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
-
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static"
 ]
 STATIC_ROOT = "static_root"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+MEDIA_URL = "media/"
+MEDIA_ROOT = "media_root"
+
+# Auth
 AUTH_USER_MODEL = "leads.User"
 
 # https://docs.djangoproject.com/en/3.2/releases/3.2/#customizing-type-of-auto-created-primary-keys
@@ -134,3 +146,22 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 LOGIN_REDIRECT_URL = "/leads"
 LOGIN_URL = "/login"
 LOGOUT_REDIRECT_URL = "/"
+
+# CRISPY
+CRISPY_ALLOWED_TEMPLATE_PACKS = "tailwind"
+CRISPY_TEMPLATE_PACK = "tailwind"
+TAILWIND_APP_NAME = "theme"
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING',
+    },
+}
